@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQUASH ELITE | Premium Club Moscow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --yellow: #FFD700;
+            --black: #111111;
+            --gray: #222222;
+            --white: #ffffff;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- REUSABLE COMPONENTS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding { padding: 80px 0; }
+        
+        .title {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .title span { color: var(--yellow); }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--yellow);
+            color: var(--black);
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn:hover { background: var(--white); }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(17, 17, 17, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--yellow);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 900; }
+        .logo span { color: var(--yellow); }
+
+        nav ul { display: flex; gap: 30px; }
+        nav ul li a:hover { color: var(--yellow); }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1593341646782-e0b495cff86d?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-inline: auto; }
+
+        /* --- GALLERY --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover { border-color: var(--yellow); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-label {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: var(--yellow);
+            color: var(--black);
+            padding: 5px 15px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* --- SERVICES --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--gray);
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 4px solid var(--yellow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover { transform: translateY(-10px); }
+        .service-card h3 { margin-bottom: 15px; color: var(--yellow); }
+
+        /* --- HISTORY SECTION --- */
+        .history {
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
+                        url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=1920'); /* Placeholder for old court */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .history-content { max-width: 800px; margin: 0 auto; text-align: center; }
+
+        /* --- HEALTH ADVANTAGES --- */
+        .health {
+            position: relative;
+            background: linear-gradient(rgba(255, 215, 0, 0.1), rgba(0, 0, 0, 0.9)), 
+                        url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .health-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .health-item {
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-left: 4px solid var(--yellow);
+        }
+
+        /* --- CONTACTS & WORKING HOURS --- */
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .info-box h3 { color: var(--yellow); margin-bottom: 20px; font-size: 1.5rem; }
+        .info-box p { margin-bottom: 10px; font-size: 1.1rem; }
+
+        /* --- MAP --- */
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border: 2px solid var(--yellow);
+            margin-top: 40px;
+        }
+
+        /* --- FOOTER & SOCIALS --- */
+        footer {
+            background: #000;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            background: var(--yellow);
+            color: var(--black);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .social-links a:hover {
+            background: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* --- ADAPTIVE QUERIES --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav ul { display: none; } /* Simplified for code-only sample */
+            .contact-info, .health-list { grid-template-columns: 1fr; }
+            .title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="logo">SQUASH<span>ELITE</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#gallery">Courts</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#history">History</a></li>
+                    <li><a href="#health">Health</a></li>
+                    <li><a href="#contacts">Contacts</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <h1>DOMINATE THE <span style="color: var(--yellow)">COURT</span></h1>
+            <p>Moscow's premier squash destination. Professional courts, expert coaching, and an elite community of players.</p>
+            <a href="#contacts" class="btn">Book a Court</a>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section-padding">
+        <div class="container">
+            <h2 class="title">Our <span>Courts</span></h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1626248685134-406f595e69e4?auto=format&fit=crop&q=80&w=800" alt="Indoor Court">
+                    <div class="gallery-label">Classic Indoor</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1594470117754-e24e138381de?auto=format&fit=crop&q=80&w=800" alt="Glass Court">
+                    <div class="gallery-label">Full Glass Showcourt</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1542144557-f509c3181e02?auto=format&fit=crop&q=80&w=800" alt="Outdoor Court">
+                    <div class="gallery-label">Outdoor Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section-padding" style="background: #0a0a0a;">
+        <div class="container">
+            <h2 class="title">Club <span>Services</span></h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Private Lessons</h3>
+                    <p>1-on-1 coaching sessions tailored to your skill level from Pro PSA trainers.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Group Lessons</h3>
+                    <p>Train with others, improve your tactics, and join our social leagues.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Rent a Court</h3>
+                    <p>ASB-certified courts with perfect lighting and ventilation available hourly.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Equipment Rent</h3>
+                    <p>High-end rackets and non-marking shoes available for rent at the reception.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="history" class="section-padding history">
+        <div class="container">
+            <div class="history-content">
+                <h2 class="title">The <span>Legacy</span> of Squash</h2>
+                <p>Squash was invented in the 1830s at <strong>Harrow School</strong> in England when students discovered that a punctured Rackets ball, which "squashed" on impact with the wall, produced a game with a greater variety of shots. From the stone courtyards of London to the high-tech glass arenas of today, squash has become a global phenomenon, recently recognized as an Olympic sport for the LA 2028 Games.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HEALTH ADVANTAGES -->
+    <section id="health" class="section-padding health">
+        <div class="container">
+            <h2 class="title">Why Play <span>Squash?</span></h2>
+            <div class="health-list">
+                <div class="health-item">
+                    <h4>Ultimate Cardio</h4>
+                    <p>Burn up to 1000 calories per hour with high-intensity interval movements.</p>
+                </div>
+                <div class="health-item">
+                    <h4>Agility & Reflexes</h4>
+                    <p>Improve hand-eye coordination and lightning-fast reaction times.</p>
+                </div>
+                <div class="health-item">
+                    <h4>Full Body Workout</h4>
+                    <p>Engage your core, legs, and upper body in every single rally.</p>
+                </div>
+                <div class="health-item">
+                    <h4>Stress Relief</h4>
+                    <p>The perfect way to unwind and release endorphins after a long workday.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTS & HOURS -->
+    <section id="contacts" class="section-padding">
+        <div class="container">
+            <h2 class="title">Visit <span>Us</span></h2>
+            <div class="contact-info">
+                <div class="info-box">
+                    <h3>Contacts</h3>
+                    <p><strong>Address:</strong> Kulakova street 20k1, Moscow, Russia</p>
+                    <p><strong>Phone:</strong> +7 (495) 000-00-00</p>
+                    <p><strong>Email:</strong> info@squashelite.ru</p>
+                </div>
+                <div class="info-box">
+                    <h3>Working Hours</h3>
+                    <p><strong>Monday - Friday:</strong> 07:00 — 23:00</p>
+                    <p><strong>Saturday - Sunday:</strong> 08:00 — 22:00</p>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <!-- Moscow Kulakova 20k1 Map -->
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2242.029804820612!2d37.39343947735315!3d55.80145628745331!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54199f1873111%3A0x63319086c8f35213!2z0YPQuy4g0JrRg9C70LDQutC-0LLQsCwgMjAsINC60L7RgNC_LiAxLCDQnNC-0YHQutCy0LAsIDEyMzU5Mg!5e0!3m2!1sen!2sru!4v1700000000000" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="logo">SQUASH<span>ELITE</span></div>
+            <p>&copy; 2025 Squash Elite Moscow. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Telegram</a>
+                <a href="#">WhatsApp</a>
+                <a href="#">Max</a>
+                <a href="#">X (Twitter)</a>
+                <a href="#">YouTube</a>
+                <a href="#">VK Video</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
